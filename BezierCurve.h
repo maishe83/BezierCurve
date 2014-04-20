@@ -81,15 +81,6 @@ class BezierCurve {
         }
         A31[N-1] = (x[N-1] - y[N-1]);
 
-//        std::cout << "A30" << std::endl;
-//        for (int j = 0; j < N; j++) {
-//            std::cout << A30[j] << std::endl;
-//        }
-//        std::cout << "A31" << std::endl;
-//        for (int j = 0; j < N; j++) {
-//            std::cout << A31[j] << std::endl;
-//        }
-
         // Quintic accelerations (continuous)
         std::vector<BezierNode<TYPE> > A50(N); // in
         std::vector<BezierNode<TYPE> > A51(N); // out
@@ -102,15 +93,6 @@ class BezierCurve {
             A51[i] = BezierNode<TYPE>::Interpolate(A31[i], A30[i+1] * (1./PR[i+1]), 0.5);
         }
         A51[N-1] = BezierNode<TYPE>::Interpolate(A31[N-1], I, 0.5);
-
-//        std::cout << "A50" << std::endl;
-//        for (int j = 0; j < N-1; j++) {
-//            std::cout << A50[j] << std::endl;
-//        }
-//        std::cout << "A51" << std::endl;
-//        for (int j = 0; j < N-1; j++) {
-//            std::cout << A51[j] << std::endl;
-//        }
 
         // Control Points
         for (int i = 0; i < 6; i++) {
@@ -142,25 +124,6 @@ class BezierCurve {
         // Calculate velocity and acceleration nodes
         Differentiate(C, V, 5);
         Differentiate(V, A, 4);
-
-//        for (int i = 0; i < 6; i++) {
-//            std::cout << "C[" << i << "]" << std::endl;
-//            for (int j = 0; j < N; j++) {
-//                std::cout << C[i][j] << std::endl;
-//            }
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            std::cout << "V[" << i << "]" << std::endl;
-//            for (int j = 0; j < N; j++) {
-//                std::cout << V[i][j] << std::endl;
-//            }
-//        }
-//        for (int i = 0; i < 4; i++) {
-//            std::cout << "A[" << i << "]" << std::endl;
-//            for (int j = 0; j < N; j++) {
-//                std::cout << A[i][j] << std::endl;
-//            }
-//        }
     }
 
     // Interpolate between all nodes recursively
@@ -224,14 +187,6 @@ class BezierCurve {
 
 public:
     /* Constructor */
-    // timeScale is the time between each waypoint (all equal)
-    // metricScale multiplies all positions (and therefore velocity
-    // and acceleration) by a factor (for example, 1/9.8 for g's)
-    //
-    // Assumes 1 quaternion for each position OR
-    // 1 single quaternion (no angular velocity) OR
-    // no quaternions (identity)
-
     BezierCurve(const std::vector<TYPE> &waypoints,
                 const std::vector<float> &durations) {
 

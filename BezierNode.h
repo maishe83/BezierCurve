@@ -116,20 +116,7 @@ public:
             quat.normalize();
         }
 
-
         return BezierNode<Quaternionf>(quat);
-
-//        float q_norm = this->q.coeffs().norm(); // should be 1
-//        float theta = acosf(this->q.w()/q_norm);
-//        if (isnan(theta)) {
-//            return BezierNode<Quaternionf>(quat);
-//        }
-//
-//        float p = powf(q_norm, n);
-//        Vector3f n_hat = sinf(n * theta) * powf(q_norm, n) * Vector3f(this->q.coeffs().head(3)) / q_norm;
-//
-//        quat = Quaternionf(p * cosf(n * theta), n_hat(0), n_hat(1), n_hat(2));
-//        return BezierNode<Quaternionf>(quat);
     }
 
     // Interpolate
